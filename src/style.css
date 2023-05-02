@@ -26,7 +26,7 @@ body {
   font-weight: 700;
   font-size: 20px;
   line-height: 20px;
-  width: 500px;
+  
   margin: 11.98px 0px;
 }
 .options {
@@ -37,6 +37,7 @@ body {
 
 .options p {
   min-width: 65.92px;
+  max-width: 250px;
   min-height: 20.65px;
   border-radius: 7.94239px;
   background: none;
@@ -49,13 +50,13 @@ body {
   margin-top: 11.98px;
 }
 
-button{
-  margin:20px;
-  background-color: #4D5B9E;
+button {
+  margin: 20px;
+  background-color: #4d5b9e;
   border: none;
   color: white;
-  width:120px;
-  height:35px;
+  width: 120px;
+  height: 35px;
   border-radius: 10px;
   cursor: pointer;
 }

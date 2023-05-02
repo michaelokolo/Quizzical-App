@@ -1,17 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-function Question(){
-  return(
+function Question(props) {
+  return (
     <div className="question-container">
-      <h3 className="question">How would one say goodbye in spanish?</h3>
+      <h3 className="question">{props.question}</h3>
       <div className="options">
-          <p>Adiós</p>
-          <p>Hola</p>
-          <p>Au Revoir</p>
-          <p>Salir</p>
+        <p>{props.correct_answer}</p>
+        <p>{props.incorrect_answer1}</p>
+        <p>{props.incorrect_answer2}</p>
+        <p>{props.incorrect_answer3}</p>
       </div>
     </div>
-  )
+  );
 }
 
-export default Question
+export default Question;
