@@ -1,43 +1,44 @@
 import React from 'react';
 import './style.css';
 import Question from './Question';
+import { nanoid } from 'nanoid';
 
 export default function App() {
-  const [questionAnswer, setQuestionAnswer] = React.useState([]);
-
   React.useEffect(() => {
     fetch('https://opentdb.com/api.php?amount=5&type=multiple')
       .then((res) => res.json())
-      .then((data) => setQuestionAnswer(data.results));
+      .then((data) => setAllQuestion(data.results));
   }, []);
 
+  const [allQuestion, setAllQuestion] = React.useState([]);
+  const [question, setQuestion] = React.useState([]);
 
-  // function shuffle() {
-  //   const newArray = [...array];
-  //   const length = newArray.length;
+  function shuffle(array) {
+    const newArray = [...array];
+    const length = newArray.length;
 
-  //   for (let start = 0; start < length; start++) {
-  //     const randomPosition = Math.floor(
-  //       (newArray.length - start) * Math.random()
-  //     );
-  //     const randomItem = newArray.splice(randomPosition, 1);
+    for (let start = 0; start < length; start++) {
+      const randomPosition = Math.floor(
+        (newArray.length - start) * Math.random()
+      );
+      const randomItem = newArray.splice(randomPosition, 1);
 
-  //     newArray.push(...randomItem);
-  //   }
+      newArray.push(...randomItem);
+    }
 
-  //   return newArray;
-  // }
+    return newArray;
+  }
+  function handleClick(event) {
+    console.log(event);
+  }
 
-  // const shuffled = shuffle(array);
-  // console.log(shuffled);
-
-  const questionElement = questionAnswer.map((quest) => (
+  const questionElement = allQuestion.map((quest) => (
     <Question
+      key={nanoid()}
       question={quest.question}
+      answers={shuffle(quest.incorrect_answers.concat(quest.correct_answer))}
       correct_answer={quest.correct_answer}
-      incorrect_answer1={quest.incorrect_answers[0]}
-      incorrect_answer2={quest.incorrect_answers[1]}
-      incorrect_answer3={quest.incorrect_answers[2]}
+      handleAllClick={handleClick}
     />
   ));
 
@@ -51,6 +52,7 @@ export default function App() {
         <Question /> */}
         {questionElement}
       </div>
+      <p></p>
       <button>Check answers</button>
     </div>
   );
