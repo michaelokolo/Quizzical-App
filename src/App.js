@@ -4,10 +4,32 @@ import Question from './Question';
 import { nanoid } from 'nanoid';
 
 export default function App() {
+  // React.useEffect(() => {
+  //   fetch('https://opentdb.com/api.php?amount=5&type=multiple')
+  //     .then((res) => res.json())
+  //     .then((data) => setAllQuestion(data.results));
+  // }, []);
   React.useEffect(() => {
-    fetch('https://opentdb.com/api.php?amount=5&type=multiple')
-      .then((res) => res.json())
-      .then((data) => setAllQuestion(data.results));
+    async function getQuestion() {
+      const res = await fetch(
+        'https://opentdb.com/api.php?amount=5&type=multiple'
+      );
+      const data = await res.json();
+      let q = [];
+      data.results.forEach((question) => {
+        q.push({
+          id: nanoid(),
+          answers: shuffle([
+            ...question.incorrect_answers,
+            question.correct_answer,
+          ]),
+          question: question.question,
+          correct: question.correct_answer,
+        });
+      });
+      setAllQuestion(q);
+    }
+    getQuestion();
   }, []);
 
   const [allQuestion, setAllQuestion] = React.useState([]);
@@ -28,17 +50,16 @@ export default function App() {
 
     return newArray;
   }
-  function handleClick(event) {
-    console.log(event);
-  }
+  
+  console.log(allQuestion);
 
   const questionElement = allQuestion.map((quest) => (
     <Question
-      key={nanoid()}
-      question={quest.question}
-      answers={shuffle(quest.incorrect_answers.concat(quest.correct_answer))}
-      correct_answer={quest.correct_answer}
-      handleAllClick={handleClick}
+      key={quest.id}
+      question ={quest.question}
+      answers = {quest.answers}
+      correct={quest.correct}
+      // handleAllClick={handleClick}
     />
   ));
 
