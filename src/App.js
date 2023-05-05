@@ -59,6 +59,7 @@ export default function App() {
       question ={quest.question}
       answers = {quest.answers}
       correct={quest.correct}
+      id={question.id}
       // handleAllClick={handleClick}
     />
   ));
