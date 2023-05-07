@@ -56,9 +56,7 @@ export default function App() {
   const questionElement = allQuestion.map((quest) => (
     <Question
       key={quest.id}
-      question ={quest.question}
-      answers = {quest.answers}
-      correct={quest.correct}
+      question ={quest}
       id={question.id}
       // handleAllClick={handleClick}
     />
