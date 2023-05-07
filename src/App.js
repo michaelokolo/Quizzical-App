@@ -25,6 +25,7 @@ export default function App() {
           ]),
           question: question.question,
           correct: question.correct_answer,
+          selected_answer: null,
         });
       });
       setAllQuestion(q);
@@ -33,7 +34,7 @@ export default function App() {
   }, []);
 
   const [allQuestion, setAllQuestion] = React.useState([]);
-  const [question, setQuestion] = React.useState([]);
+  const [score, setScore] = React.useState(0);
 
   function shuffle(array) {
     const newArray = [...array];
@@ -50,29 +51,30 @@ export default function App() {
 
     return newArray;
   }
-  
-  console.log(allQuestion);
+
+  function selected(answer, id) {
+    setAllQuestion((prevQuestion) =>
+      prevQuestion.map((quest) => {
+        return quest.id === id ? { ...quest, selected_answer: answer } : quest;
+      })
+    );
+  }
 
   const questionElement = allQuestion.map((quest) => (
     <Question
       key={quest.id}
-      question ={quest}
-      id={question.id}
-      // handleAllClick={handleClick}
+      question={quest}
+      correct={quest.correct}
+      id={quest.id}
+      selected={selected}
+      selected_answer={quest.selected_answer}
     />
   ));
 
   return (
     <div className="container">
-      <div>
-        {/* <Question />
-        <Question />
-        <Question />
-        <Question />
-        <Question /> */}
-        {questionElement}
-      </div>
-      <p></p>
+      <div>{questionElement}</div>
+
       <button>Check answers</button>
     </div>
   );

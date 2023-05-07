@@ -26,7 +26,7 @@ body {
   font-weight: 700;
   font-size: 20px;
   line-height: 20px;
-  
+
   margin: 11.98px 0px;
 }
 .options {
@@ -40,7 +40,6 @@ body {
   max-width: 250px;
   min-height: 20.65px;
   border-radius: 7.94239px;
-  background: none;
   border: 1px solid #293264;
   justify-content: center;
   align-items: center;
@@ -59,4 +58,8 @@ button {
   height: 35px;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.answer {
+  background: #d6dbf5;
 }
