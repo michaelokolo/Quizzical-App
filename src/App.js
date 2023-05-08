@@ -72,10 +72,9 @@ export default function App() {
     setScore(count);
   }
 
-  
   function checkAnswers() {
-    const checked = allQuestion.every(question => question.checked === true)
-    setAnswerCheck(checked)
+    const checked = allQuestion.every((question) => question.checked === true);
+    setAnswerCheck(checked);
   }
 
   //console.log(answerCheck)
@@ -88,10 +87,9 @@ export default function App() {
       id={quest.id}
       selected={selected}
       selected_answer={quest.selected_answer}
-      answerCheck = {answerCheck}
+      answerCheck={answerCheck}
     />
   ));
-
 
   return (
     <div className="container">
