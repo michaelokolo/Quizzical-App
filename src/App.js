@@ -58,6 +58,15 @@ export default function App() {
         return quest.id === id ? { ...quest, selected_answer: answer } : quest;
       })
     );
+    let count = 0;
+    allQuestion.map((question) => {
+      count = question.selected_answer === question.correct ? count + 1 : count;
+    });
+    setScore(count);
+  }
+
+  function checkAnswers() {
+    console.log('I was clicked');
   }
 
   const questionElement = allQuestion.map((quest) => (
@@ -75,7 +84,7 @@ export default function App() {
     <div className="container">
       <div>{questionElement}</div>
 
-      <button>Check answers</button>
+      <button onClick={checkAnswers}>Check answers</button>
     </div>
   );
 }

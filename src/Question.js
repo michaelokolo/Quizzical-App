@@ -1,4 +1,5 @@
 import React from 'react';
+import {nanoid} from 'nanoid'
 
 function Question(props) {
   const answers = props.question.answers;
@@ -7,6 +8,7 @@ function Question(props) {
       <p
         className={props.selected_answer === answer ? 'answer' : ''}
         onClick={() => props.selected(answer, props.id)}
+        key = {nanoid()}
       >
         {answer}
       </p>
