@@ -26,6 +26,7 @@ export default function App() {
           question: question.question,
           correct: question.correct_answer,
           selected_answer: null,
+          checked: false,
         });
       });
       setAllQuestion(q);
@@ -35,6 +36,7 @@ export default function App() {
 
   const [allQuestion, setAllQuestion] = React.useState([]);
   const [score, setScore] = React.useState(0);
+  const [answerCheck, setAnswerCheck] = React.useState(false);
 
   function shuffle(array) {
     const newArray = [...array];
@@ -58,6 +60,11 @@ export default function App() {
         return quest.id === id ? { ...quest, selected_answer: answer } : quest;
       })
     );
+    setAllQuestion((prevQuestion) =>
+      prevQuestion.map((quest) => {
+        return quest.id === id ? { ...quest, checked: true } : quest;
+      })
+    );
     let count = 0;
     allQuestion.map((question) => {
       count = question.selected_answer === question.correct ? count + 1 : count;
@@ -65,9 +72,13 @@ export default function App() {
     setScore(count);
   }
 
+  
   function checkAnswers() {
-    console.log('I was clicked');
+    const checked = allQuestion.every(question => question.checked === true)
+    setAnswerCheck(checked)
   }
+
+  //console.log(answerCheck)
 
   const questionElement = allQuestion.map((quest) => (
     <Question
@@ -77,8 +88,10 @@ export default function App() {
       id={quest.id}
       selected={selected}
       selected_answer={quest.selected_answer}
+      answerCheck = {answerCheck}
     />
   ));
+
 
   return (
     <div className="container">

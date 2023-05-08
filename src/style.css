@@ -63,3 +63,10 @@ button {
 .answer {
   background: #d6dbf5;
 }
+
+.correct {
+  background: #94d7a2;
+}
+.wrong {
+  background: #f8bcbc;
+}

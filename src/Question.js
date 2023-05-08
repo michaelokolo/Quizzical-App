@@ -1,19 +1,29 @@
 import React from 'react';
-import {nanoid} from 'nanoid'
+import { nanoid } from 'nanoid';
 
 function Question(props) {
   const answers = props.question.answers;
   const answerElement = answers.map((answer) => {
     return (
       <p
-        className={props.selected_answer === answer ? 'answer' : ''}
+        className={
+          props.answerCheck && props.selected_answer === answer
+            ? 'correct'
+            : props.answerCheck && !props.selected_answer === answer
+            ? 'wrong'
+            : props.selected_answer === answer
+            ? 'answer'
+            : ''
+        }
         onClick={() => props.selected(answer, props.id)}
-        key = {nanoid()}
+        key={nanoid()}
       >
         {answer}
       </p>
     );
   });
+
+  console.log(props.answerCheck);
 
   return (
     <div className="question-container">
