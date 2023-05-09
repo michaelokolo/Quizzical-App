@@ -12,6 +12,32 @@ body {
   color: #293264;
 }
 
+.start-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.start-page h1 {
+  font-weight: 700;
+  font-size: 31.25px;
+  line-height: 37px;
+}
+
+.start-page p {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 19px;
+}
+
+.start-page button {
+  width: 193px;
+  height: 52px;
+  font-size: 17px;
+}
+
 .container {
   display: flex;
   justify-content: center;

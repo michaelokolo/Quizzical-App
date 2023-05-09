@@ -37,6 +37,7 @@ export default function App() {
   const [allQuestion, setAllQuestion] = React.useState([]);
   const [score, setScore] = React.useState(0);
   const [answerCheck, setAnswerCheck] = React.useState(false);
+  const [startQuiz, setStartQUiz] = React.useState(true);
 
   function shuffle(array) {
     const newArray = [...array];
@@ -91,11 +92,25 @@ export default function App() {
     />
   ));
 
+  const startPage = () => {
+    return (
+      <div className="start-page">
+        <h1>Quizzical</h1>
+        <p>An amazing quiz game for everybody...</p>
+        <button onClick={startGame}>Start quiz</button>
+      </div>
+    );
+  };
+
+  function startGame() {
+    setStartQUiz((prevState) => !prevState);
+  }
+
   return (
     <div className="container">
-      <div>{questionElement}</div>
-
-      <button onClick={checkAnswers}>Check answers</button>
+      {!startQuiz && <div>{questionElement}</div>}
+      {!startQuiz && <button onClick={checkAnswers}>Check answers</button>}
+      {startQuiz && startPage()}
     </div>
   );
 }
