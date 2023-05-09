@@ -17,7 +17,6 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
 }
 
 .start-page h1 {
@@ -84,6 +83,11 @@ button {
   height: 35px;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.result {
+  display: flex;
+  align-items: center;
 }
 
 .answer {

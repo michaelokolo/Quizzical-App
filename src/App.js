@@ -4,11 +4,12 @@ import Question from './Question';
 import { nanoid } from 'nanoid';
 
 export default function App() {
-  // React.useEffect(() => {
-  //   fetch('https://opentdb.com/api.php?amount=5&type=multiple')
-  //     .then((res) => res.json())
-  //     .then((data) => setAllQuestion(data.results));
-  // }, []);
+  const [allQuestion, setAllQuestion] = React.useState([]);
+  const [score, setScore] = React.useState(0);
+  const [startQuiz, setStartQuiz] = React.useState(true);
+  const [playAgain, setPlayAgain] = React.useState(false);
+  const [answerCheck, setAnswerCheck] = React.useState(false);
+
   React.useEffect(() => {
     async function getQuestion() {
       const res = await fetch(
@@ -32,12 +33,7 @@ export default function App() {
       setAllQuestion(q);
     }
     getQuestion();
-  }, []);
-
-  const [allQuestion, setAllQuestion] = React.useState([]);
-  const [score, setScore] = React.useState(0);
-  const [answerCheck, setAnswerCheck] = React.useState(false);
-  const [startQuiz, setStartQUiz] = React.useState(true);
+  }, [playAgain]);
 
   function shuffle(array) {
     const newArray = [...array];
@@ -68,7 +64,8 @@ export default function App() {
     );
     let count = 0;
     allQuestion.map((question) => {
-      count = question.selected_answer === question.correct ? count + 1 : count;
+      count =
+        question.selected_answer === question.correct ? (count += 1) : count;
     });
     setScore(count);
   }
@@ -103,13 +100,26 @@ export default function App() {
   };
 
   function startGame() {
-    setStartQUiz((prevState) => !prevState);
+    setStartQuiz((prevState) => !prevState);
   }
+
+  function playGameAgain() {
+    setPlayAgain((prevState) => !prevState);
+    setAnswerCheck((prevState) => !prevState);
+  }
+  console.log(allQuestion);
 
   return (
     <div className="container">
       {!startQuiz && <div>{questionElement}</div>}
-      {!startQuiz && <button onClick={checkAnswers}>Check answers</button>}
+      {!startQuiz && (
+        <div className="result">
+          {answerCheck && <h3>You scored {score}/5 correct answers</h3>}
+          <button onClick={!answerCheck ? checkAnswers : playGameAgain}>
+            {!answerCheck ? 'Check answers' : 'Play again'}
+          </button>
+        </div>
+      )}
       {startQuiz && startPage()}
     </div>
   );

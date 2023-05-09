@@ -5,11 +5,12 @@ function Question(props) {
   const answers = props.question.answers;
   const answerElement = answers.map((answer) => {
     const beforeChecked = () => {
-      if (props.selected_answer === answer) {
-        return 'answer';
-      } else {
-        return '';
-      }
+      // if (props.selected_answer === answer) {
+      //   return 'answer';
+      // } else {
+      //   return '';
+      // }
+      return props.selected_answer === answer ? 'answer' : '';
     };
     const afterChecked = () => {
       if (
